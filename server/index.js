@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 //  import jwt from 'jsonwebtoken';
-import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import recipeRoutes from './routes/recipes.js';
 import userRoutes from './routes/users.js';
