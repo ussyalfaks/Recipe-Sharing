@@ -1,4 +1,3 @@
-import React from 'react';
 import { Recipe } from '../../types';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs';
 import RecipeGrid from '../../components/RecipeGrid';

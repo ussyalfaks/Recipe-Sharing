@@ -49,7 +49,7 @@ app.use('/api/users', userRoutes);
 
 // MongoDB connection
 console.log("Attempting to connect to MongoDB...");
-mongoose.connect(process.env.MONGODB_URI )
+mongoose.connect(process.env.MONGODB_URI ||'mongodb+srv://byussy9:Wz9thuzcNmXEl8vL@recipesharing.q05t6.mongodb.net/?retryWrites=true&w=majority&appName=RecipeSharing' )
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Heart, MessageCircle, Bookmark, Clock, Star } from 'lucide-react';
+import { Heart, MessageCircle, Bookmark } from 'lucide-react';
 import api from '../../utils/api';
 import { Recipe } from '../../types';
 import { useAuth } from '../../hooks/useAuth';
