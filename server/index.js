@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
-
+const app = express();
 const PORT = process.env.PORT || 10000;
 // LOCALLY
 // const PORT = process.env.PORT || 5000;
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.use(cors({
   origin: [
-    ''
+    'https://recipe-sharing-rouge.vercel.app/'
 
   ],
   credentials: true,
