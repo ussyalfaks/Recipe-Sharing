@@ -1,18 +1,17 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv';
 //  import jwt from 'jsonwebtoken';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import authRoutes from './routes/auth.js';
 import recipeRoutes from './routes/recipes.js';
 import userRoutes from './routes/users.js';
 import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
 dotenv.config();
 
 
-const __filename = fileURLToPath(import.meta.url);
+// const __filename = fileURLToPath(import.meta.url);
 //  const __dirname = dirname(__filename);
 
 
