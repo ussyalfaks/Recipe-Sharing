@@ -1,9 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://recipe-sharing-znbj.onrender.com',
+  baseURL: 'https://recipe-sharing-znbj.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
+
   },
 });
 

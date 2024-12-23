@@ -26,7 +26,10 @@ app.get('/', (req, res) => {
 
 app.use(cors({
   origin: [
-    'https://recipe-sharing-rouge.vercel.app'
+    'https://recipe-sharing-rouge.vercel.app',
+    'https://recipe-sharing-git-main-ussyalfaks-projects.vercel.app',
+    'https://recipe-sharing-r71mchq5a-ussyalfaks-projects.vercel.app',
+    'https://recipe-sharing-r71mchq5a-ussyalfaks-projects.vercel.app',
 
   ],
   credentials: true,
