@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 //  import jwt from 'jsonwebtoken';
-import authRoutes from './routes/';
+import authRoutes from './routes/auth.js';
 import recipeRoutes from './routes/recipes.js';
 import userRoutes from './routes/users.js';
 import cookieParser from 'cookie-parser';
