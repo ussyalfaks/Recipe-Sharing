@@ -22,12 +22,12 @@ const Home = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto flex flex-1 justify-center py-5">
-      <div className=" flex flex-col  flex-1">
+    <div className="max-w-7xl mx-auto flex justify-center py-5">
+      <div className=" flex flex-col">
         <div className="container">
-          <div className="@[480px]:p-4">
+          <div className="@[480px]:p-2">
             <div
-              className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-4 @[480px]:rounded-xl items-start justify-end px-4 pb-10 @[480px]:px-5"
+              className="flex min-h-[480px] flex-col mx-auto bg-cover bg-center bg-no-repeat @[480px]:gap-4 @[480px]:rounded-xl items-start justify-end px-4 pb-12"
               style={{
                 backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=2000&q=80")',
               }}
