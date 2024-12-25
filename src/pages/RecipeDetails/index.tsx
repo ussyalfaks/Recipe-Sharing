@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Heart, MessageCircle, Bookmark } from 'lucide-react';
 import api from '../../utils/api';
@@ -88,8 +88,45 @@ const RecipeDetails = () => {
           </button>
         </div>
 
-        {/* Recipe content sections */}
-        {/* Add ingredients, instructions, and comments sections here */}
+        {/* Comments section */}
+        <div className="p-4">
+          <h2 className="text-xl font-bold mb-4">Comments</h2>
+          
+          {user ? (
+            <form onSubmit={handleComment} className="mb-6">
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Add a comment..."
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-[#e63b19] focus:border-[#e63b19]"
+                rows={3}
+              />
+              <button
+                type="submit"
+                className="mt-2 px-4 py-2 bg-[#e63b19] text-white rounded-lg hover:bg-[#d63516]"
+                disabled={!comment.trim()}
+              >
+                Post Comment
+              </button>
+            </form>
+          ) : (
+            <p className="text-gray-600 mb-4">Please log in to comment</p>
+          )}
+
+          <div className="space-y-4">
+            {recipe.comments.map((comment, index) => (
+              <div key={index} className="border-b border-gray-200 pb-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="font-semibold">{comment.user.username}</span>
+                  <span className="text-gray-500 text-sm">
+                    {new Date(comment.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <p className="text-gray-700">{comment.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
