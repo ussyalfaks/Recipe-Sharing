@@ -27,6 +27,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Handle specific error cases
+    if (error.response?.status === 413) {
+      return Promise.reject(new Error('File size too large. Please upload a smaller image.'));
+    }
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/login';
