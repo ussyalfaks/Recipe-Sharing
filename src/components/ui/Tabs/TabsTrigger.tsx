@@ -1,19 +1,22 @@
 import React from 'react';
+import { useTabsContext } from './Tabs';
 
 interface TabsTriggerProps {
   value: string;
-  onClick: () => void;
   children: React.ReactNode;
   className?: string;
 }
 
-const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, onClick, children, className = '' }) => {
+const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, children, className = '' }) => {
+  const { activeTab, setActiveTab } = useTabsContext();
+
   return (
     <button
       role="tab"
       data-value={value}
-      onClick={onClick}
+      onClick={() => setActiveTab(value)}
       className={className}
+      aria-selected={activeTab === value}
     >
       {children}
     </button>

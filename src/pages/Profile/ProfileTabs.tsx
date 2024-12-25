@@ -1,3 +1,4 @@
+import React from 'react';
 import { Recipe } from '../../types';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Tabs';
 import RecipeGrid from '../../components/RecipeGrid';
@@ -13,14 +14,12 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({
   recipes,
   favorites,
   activeTab,
-  onTabChange,
 }) => {
   return (
-    <Tabs defaultValue="recipes" className="w-full">
+    <Tabs defaultValue={activeTab} className="w-full">
       <TabsList className="flex space-x-4 border-b border-gray-200 mb-6">
         <TabsTrigger
           value="recipes"
-          onClick={() => onTabChange('recipes')}
           className={`pb-2 text-lg font-medium ${
             activeTab === 'recipes'
               ? 'text-[#e63b19] border-b-2 border-[#e63b19]'
@@ -31,7 +30,6 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({
         </TabsTrigger>
         <TabsTrigger
           value="favorites"
-          onClick={() => onTabChange('favorites')}
           className={`pb-2 text-lg font-medium ${
             activeTab === 'favorites'
               ? 'text-[#e63b19] border-b-2 border-[#e63b19]'
