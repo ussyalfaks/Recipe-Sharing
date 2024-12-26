@@ -39,7 +39,7 @@ const Navbar = () => {
               </button>
               <Link to="/profile">
                 <div
-                  className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                  className="bg-center bg-no-repeat aspect-square bg-cover border border-orange-600 rounded-full size-10"
                   style={{ backgroundImage: `url(${user.profileImage || 'https://via.placeholder.com/40'})` }}
                 />
               </Link>
