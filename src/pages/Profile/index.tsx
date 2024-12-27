@@ -23,7 +23,7 @@ const Profile = () => {
   if (!user) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <p className="text-lg text-gray-600">Please log in to view your profile</p>
+        <p className="text-lg text-red-600 ">Please log in to view your profile</p>
       </div>
     );
   }
@@ -37,7 +37,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container  mx-auto px-4 py-8">
       <ProfileHeader user={user} />
       <ProfileTabs
         recipes={recipes}
