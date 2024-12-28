@@ -14,7 +14,7 @@ const RecipeCard = ({ id, title, author, cookTime, rating, imageUrl }: RecipeCar
   return (
     <Link to={`/recipe/${id}`} className="flex flex-col gap-3 pb-3">
       <div
-        className=" w-1/2 bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+        className=" w-full md:w-9/12 bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
       <div>
