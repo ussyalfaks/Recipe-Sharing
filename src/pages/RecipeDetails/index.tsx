@@ -53,7 +53,7 @@ const RecipeDetails = () => {
   if (!recipe) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#e63b19]"></div>
+        <div className="loader"></div>
       </div>
     );
   }
@@ -66,7 +66,7 @@ const RecipeDetails = () => {
           <img 
             src={recipe.imageUrl} 
             alt={recipe.title} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </div>
 
@@ -140,7 +140,7 @@ const RecipeDetails = () => {
               </button>
             </form>
           ) : (
-            <p className="text-gray-600 mb-4">Please log in to comment</p>
+            <p className=" text-[#e63b19] mb-4">Please log in to comment</p>
           )}
 
           <div className="space-y-4">
