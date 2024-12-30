@@ -83,22 +83,22 @@ export const updateRecipe = async (req, res) => {
   }
 };
 
-export const deleteRecipe = async (req, res) => {
-  try {
-    const recipe = await Recipe.findById(req.params.id);
-    if (!recipe) {
-      return res.status(404).json({ message: 'Recipe not found' });
-    }
-    if (recipe.author.toString() !== req.user.id) {
-      return res.status(403).json({ message: 'Not authorized' });
-    }
+// export const deleteRecipe = async (req, res) => {
+//   try {
+//     const recipe = await Recipe.findById(req.params.id);
+//     if (!recipe) {
+//       return res.status(404).json({ message: 'Recipe not found' });
+//     }
+//     if (recipe.author.toString() !== req.user.id) {
+//       return res.status(403).json({ message: 'Not authorized' });
+//     }
 
-    await recipe.remove();
-    res.json({ message: 'Recipe deleted' });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     await recipe.remove();
+//     res.json({ message: 'Recipe deleted' });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 export const likeRecipe = async (req, res) => {
   try {
@@ -138,5 +138,27 @@ export const addComment = async (req, res) => {
     res.json(recipe);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+export const deleteRecipe = async (req, res) => {
+  try {
+    const recipe = await Recipe.findById(req.params.id);
+    
+    if (!recipe) {
+      return res.status(404).json({ message: 'Recipe not found' });
+    }
+
+    if (recipe.author.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Not authorized to delete this recipe' });
+    }
+
+    // Use findByIdAndDelete instead of remove()
+    await Recipe.findByIdAndDelete(req.params.id);
+    
+    res.json({ message: 'Recipe deleted successfully' });
+  } catch (error) {
+    console.error('Delete recipe error:', error);
+    res.status(500).json({ message: 'Error deleting recipe', error: error.message });
   }
 };
