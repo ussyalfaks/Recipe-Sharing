@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Clock, Star } from 'lucide-react';
+import { Clock, Star, Trash2, Image as ImageIcon } from 'lucide-react';
 
 interface RecipeCardProps {
   id: string;
@@ -8,15 +8,30 @@ interface RecipeCardProps {
   cookTime: number;
   rating: number;
   imageUrl: string;
+  isOwner?: boolean;
+  onDelete?: (id: string) => void;
+  onImageUpdate?: (id: string) => void;
 }
 
-const RecipeCard = ({ id, title, author, cookTime, rating, imageUrl }: RecipeCardProps) => {
+const RecipeCard = ({ 
+  id, 
+  title, 
+  author, 
+  cookTime, 
+  rating, 
+  imageUrl,
+  isOwner,
+  onDelete,
+  onImageUpdate 
+}: RecipeCardProps) => {
   return (
-    <Link to={`/recipe/${id}`} className="flex flex-col gap-3 pb-3">
-      <div
-        className=" w-full md:w-9/12 bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
+    <div className="flex flex-col gap-3 pb-3 relative group">
+      <Link to={`/recipe/${id}`}>
+        <div
+          className="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        />
+      </Link>
       <div>
         <p className="text-[#181211] text-base font-medium leading-normal">{title}</p>
         <p className="text-[#886963] text-sm font-normal leading-normal">By {author}</p>
@@ -27,7 +42,34 @@ const RecipeCard = ({ id, title, author, cookTime, rating, imageUrl }: RecipeCar
           <span>{rating}</span>
         </div>
       </div>
-    </Link>
+
+      {isOwner && (
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              onImageUpdate?.(id);
+            }}
+            className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
+            title="Update Image"
+          >
+            <ImageIcon className="h-4 w-4 text-[#e63b19]" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              if (window.confirm('Are you sure you want to delete this recipe?')) {
+                onDelete?.(id);
+              }
+            }}
+            className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
+            title="Delete Recipe"
+          >
+            <Trash2 className="h-4 w-4 text-red-500" />
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 

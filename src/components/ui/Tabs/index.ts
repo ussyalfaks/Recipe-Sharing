@@ -1,4 +1,6 @@
-export { default as Tabs } from './Tabs';
-export { default as TabsList } from './TabsList';
-export { default as TabsTrigger } from './TabsTrigger';
-export { default as TabsContent } from './TabsContent';
+import Tabs from './Tabs';
+import TabsList from './TabsList';
+import TabsTrigger from './TabsTrigger';
+import TabsContent from './TabsContent';
+
+export { Tabs, TabsList, TabsTrigger, TabsContent };

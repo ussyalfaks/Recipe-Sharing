@@ -68,6 +68,22 @@ export const addComment = createAsyncThunk(
   }
 );
 
+export const deleteRecipe = createAsyncThunk(
+  'recipes/deleteRecipe',
+  async (id: string) => {
+    await api.delete(`/recipes/${id}`);
+    return id;
+  }
+);
+
+export const updateRecipeImage = createAsyncThunk(
+  'recipes/updateRecipeImage',
+  async ({ id, imageUrl }: { id: string; imageUrl: string }) => {
+    const response = await api.patch(`/recipes/${id}`, { imageUrl });
+    return response.data;
+  }
+);
+
 const recipeSlice = createSlice({
   name: 'recipes',
   initialState,
@@ -139,6 +155,23 @@ const recipeSlice = createSlice({
       .addCase(addComment.fulfilled, (state, action) => {
         const updatedRecipe = action.payload;
         state.recipes = state.recipes.map(recipe => 
+          recipe._id === updatedRecipe._id ? updatedRecipe : recipe
+        );
+        if (state.currentRecipe?._id === updatedRecipe._id) {
+          state.currentRecipe = updatedRecipe;
+        }
+      })
+      // Delete Recipe
+      .addCase(deleteRecipe.fulfilled, (state, action) => {
+        state.recipes = state.recipes.filter(recipe => recipe._id !== action.payload);
+        if (state.currentRecipe?._id === action.payload) {
+          state.currentRecipe = null;
+        }
+      })
+      // Update Recipe Image
+      .addCase(updateRecipeImage.fulfilled, (state, action) => {
+        const updatedRecipe = action.payload;
+        state.recipes = state.recipes.map(recipe =>
           recipe._id === updatedRecipe._id ? updatedRecipe : recipe
         );
         if (state.currentRecipe?._id === updatedRecipe._id) {
