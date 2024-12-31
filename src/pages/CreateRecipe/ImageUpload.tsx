@@ -1,5 +1,6 @@
-import React from 'react';
+import { useState } from 'react';
 import { Upload } from 'lucide-react';
+import { compressImage, validateImage } from '../../utils/image';
 
 interface ImageUploadProps {
   value: string;
@@ -7,16 +8,28 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange }) => {
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      // In a real application, you would upload to a server/CDN
-      // For now, we'll use a placeholder or URL input
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        onChange(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+
+    const validationError = validateImage(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+      const compressedImage = await compressImage(file);
+      onChange(compressedImage);
+    } catch (err) {
+      setError('Failed to process image. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,11 +42,23 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange }) => {
           <div className="flex text-sm text-gray-600">
             <label className="relative cursor-pointer bg-white rounded-md font-medium text-[#e63b19] hover:text-[#d63516]">
               <span>Upload a file</span>
-              <input type="file" className="sr-only" onChange={handleImageChange} accept="image/*" />
+              <input
+                type="file"
+                className="sr-only"
+                onChange={handleImageChange}
+                accept="image/*"
+                disabled={loading}
+              />
             </label>
             <p className="pl-1">or drag and drop</p>
           </div>
-          <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+          <p className="text-xs text-gray-500">PNG, JPG, GIF up to 50MB</p>
+          {loading && (
+            <p className="text-sm text-gray-600">Processing image...</p>
+          )}
+          {error && (
+            <p className="text-sm text-red-600">{error}</p>
+          )}
         </div>
       </div>
       {value && (
