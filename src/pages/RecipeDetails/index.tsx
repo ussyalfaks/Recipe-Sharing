@@ -59,10 +59,10 @@ const RecipeDetails = () => {
   }
 
   return (
-    <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
+    <div className="px-4 md:px-32 flex flex-1 justify-center py-5">
       <div className="layout-content-container flex flex-col max-w-[960px] flex-1 gap-6">
         {/* Hero Image */}
-        <div className="w-3/5 rounded-xl overflow-hidden">
+        <div className="w-3/5 mx-auto rounded-xl overflow-hidden">
           <img 
             src={recipe.imageUrl} 
             alt={recipe.title} 
