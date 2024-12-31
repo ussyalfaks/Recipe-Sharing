@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { fetchRecipes, fetchTrendingRecipes } from '../../store/slices/recipeSlice';
@@ -22,6 +22,7 @@ const Home = () => {
   }
 
   return (
+ <>
     <div className=" flex justify-center pb-5">
       <div className=" flex flex-col w-full">
         <div className=" ">
@@ -48,6 +49,7 @@ const Home = () => {
         <RecipeGrid title="Popular Recipes" recipes={recipes} />
       </div>
     </div>
+ </>
   );
 };
 
