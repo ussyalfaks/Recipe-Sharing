@@ -16,6 +16,14 @@ const initialState: UserState = {
   error: null,
 };
 
+export const updateProfileImage = createAsyncThunk(
+  'user/updateProfileImage',
+  async (imageData: string) => {
+    const response = await api.patch('/users/profile-image', { imageData });
+    return response.data;
+  }
+);
+
 export const fetchUserRecipes = createAsyncThunk(
   'user/fetchRecipes',
   async (userId: string) => {
@@ -38,6 +46,18 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(updateProfileImage.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(updateProfileImage.fulfilled, (state) => {
+      state.loading = false;
+    })
+    .addCase(updateProfileImage.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || 'Failed to update profile image';
+    })
+    
       .addCase(fetchUserRecipes.pending, (state) => {
         state.loading = true;
       })
