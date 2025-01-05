@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
 import { 
@@ -27,23 +27,23 @@ export const useRecipe = (id?: string) => {
     return () => {
       dispatch(clearCurrentRecipe());
     };
-  }, [dispatch, id]);
+  }, [dispatch, id]); // Added proper dependency array
 
-  const handleLike = async (recipeId: string) => {
+  const handleLike = useCallback(async (recipeId: string) => {
     try {
       await dispatch(likeRecipe(recipeId)).unwrap();
     } catch (error) {
       console.error('Failed to like recipe:', error);
     }
-  };
+  }, [dispatch]); // Added proper dependency array
 
-  const handleComment = async (recipeId: string, text: string) => {
+  const handleComment = useCallback(async (recipeId: string, text: string) => {
     try {
       await dispatch(addComment({ id: recipeId, text })).unwrap();
     } catch (error) {
       console.error('Failed to add comment:', error);
     }
-  };
+  }, [dispatch]); // Added proper dependency array
 
   return {
     recipes,

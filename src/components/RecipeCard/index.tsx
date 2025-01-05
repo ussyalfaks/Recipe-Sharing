@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Star, Trash2, Image as ImageIcon } from 'lucide-react';
 
@@ -24,6 +25,19 @@ const RecipeCard = ({
   onDelete,
   onImageUpdate 
 }: RecipeCardProps) => {
+  // Use useCallback to memoize handlers
+  const handleDelete = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.confirm('Are you sure you want to delete this recipe?')) {
+      onDelete?.(id);
+    }
+  }, [id, onDelete]);
+
+  const handleImageUpdate = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    onImageUpdate?.(id);
+  }, [id, onImageUpdate]);
+
   return (
     <div className="flex flex-col gap-3 pb-3 relative group">
       <Link to={`/recipe/${id}`}>
@@ -46,22 +60,14 @@ const RecipeCard = ({
       {isOwner && (
         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              onImageUpdate?.(id);
-            }}
+            onClick={handleImageUpdate}
             className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
             title="Update Image"
           >
             <ImageIcon className="h-4 w-4 text-[#e63b19]" />
           </button>
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              if (window.confirm('Are you sure you want to delete this recipe?')) {
-                onDelete?.(id);
-              }
-            }}
+            onClick={handleDelete}
             className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
             title="Delete Recipe"
           >
@@ -73,4 +79,4 @@ const RecipeCard = ({
   );
 };
 
-export default RecipeCard;
+export default React.memo(RecipeCard);
