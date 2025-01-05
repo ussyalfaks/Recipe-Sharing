@@ -96,7 +96,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 For questions or suggestions, feel free to reach out:
 - ** X **: [usman_alfaki](https://x.com/usman_alfaki)
-- **LIVE LINK**: [your-username](https://github.com/your-username)
+- **LIVE LINK**: https://recipe-sharing-rouge.vercel.app/ 
 
 ---
 
